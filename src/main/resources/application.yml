@@ -1,4 +1,8 @@
 server:
-  port: 9090
-  context-path: /admin
+  port: 8080
 debug: true
+
+# 这个开发配置为false，避免改了模板还要重启服务器
+spring:
+  thymeleaf:
+    cache: false

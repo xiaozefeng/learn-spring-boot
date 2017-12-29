@@ -48,6 +48,67 @@ spring.profiles.active=dev/test/prod
 ```
 
 
+## How To Run
+1. 注释掉pom.xml文件
+`
+		<dependency>
+			<groupId>com.gz</groupId>
+			<artifactId>spring-boot-starter-hello</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+`
+或者安装 spring-boot-starter-hello 模块
+2. hello starter 下载地址
+`https://github.com/xiaozefeng/spring-boot-starter-hello.git`
+
+
+## Web开发
+### 热加载
+``` xml
+<plugin>
+ 				<groupId>org.springframework.boot</groupId>
+ 				<artifactId>spring-boot-maven-plugin</artifactId>
+                 <configuration>
+                     <fork>true</fork>
+                     <!--静态资源热加载-->
+                     <addResources>true</addResources>
+                     <!--解决 spring-boot run 启动时乱码问题-->
+                     <jvmArguments>-Dfile.encoding=UTF-8</jvmArguments>
+                 </configuration>
+ 			</plugin>
+```
+### web mvc配置
+自定义HttpMessageConverter
+```java 
+@Bean
+public HttpMessageConverter customConverters(){
+    return new HttpMessageConverters(custom1, custom2);
+}
+```
+
+### 接管Spring Boot 的Web配置
+继承 WebMvcConfigurerAdapter
+
+### 切换容器
+```xml
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+        <exclusions>
+            <exclusion>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-tomcat</artifactId>
+            </exclusion>
+        </exclusions>
+    </dependency>
+	<!-- jetty undertow -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-undertow</artifactId>
+    </dependency>
+```
+
+
 
 
 
