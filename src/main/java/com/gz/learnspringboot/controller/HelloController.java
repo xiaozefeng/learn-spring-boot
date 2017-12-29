@@ -30,6 +30,11 @@ public class HelloController {
         return "index";
     }
 
+    @GetMapping("/other")
+    public String other(){
+        return "other";
+    }
+
     @GetMapping("/hello")
     @ResponseBody
     public String hello() {
